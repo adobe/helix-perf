@@ -1,7 +1,7 @@
 {
-  "name": "@adobe/new-package-template",
+  "name": "@adobe/helix-perf",
   "version": "0.0.1",
-  "description": "Example Package",
+  "description": "Helix Performance",
   "main": "index.js",
   "scripts": {
     "test": "nyc --reporter=text --reporter=lcov --check-coverage --branches 100 --statements 100 --lines 100 mocha",
@@ -10,7 +10,7 @@
     "preversion": "npm run junit",
     "postversion": "git push origin master --follow-tags",
     "zip": "npm ls --prod --parseable | grep node_modules | sed -e 's/.*node_modules/node_modules/' | xargs zip perf.zip -r src package.json index.js",
-    "deploy": "npm run zip && wsk action update perf perf.zip --kind nodejs:8 --web true --web-secure false --timeout 600000 -p CALIBRE_AUTH \"$CALIBRE_AUTH\"",
+    "deploy": "npm run zip && wsk action update perf perf.zip --kind nodejs:8 --web true --web-secure false --timeout 300000 -p CALIBRE_AUTH \"$CALIBRE_AUTH\"",
     "delete-git-tag": "git tag -d v$npm_package_version && git push origin :v$npm_package_version"
   },
   "repository": {
