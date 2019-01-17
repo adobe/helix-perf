@@ -16,11 +16,17 @@ function init(token) {
     if (calibre) {
       return calibre;
     }
+    // calibre loads the environment variables at require-time
+    // so we delay loading until called.
+    /* eslint-disable global-require */
     calibre = require('calibre');
-  }
+    return calibre;
+  };
 }
 
-function test(calibre, {url, location, device, connection, strain}) {
+function test(calibre, {
+  url, location, device, connection, strain,
+}) {
   return calibre.Test.create({
     url,
     location,
@@ -30,15 +36,15 @@ function test(calibre, {url, location, device, connection, strain}) {
       name: 'X-Strain',
       value: strain,
       secure: true,
-      httpOnly: true
-    }]
+      httpOnly: true,
+    }],
   }).then(({ uuid }) => calibre.Test.waitForTest(uuid));
 }
 
 module.exports = async function main({
   CALIBRE_AUTH,
-  tests = []
+  tests = [],
 }) {
   const getcalibre = init(CALIBRE_AUTH);
-  return Promise.all(tests.map((spec) => test(getcalibre(), spec)));
+  return Promise.all(tests.map(spec => test(getcalibre(), spec)));
 };
