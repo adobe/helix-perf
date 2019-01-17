@@ -36,12 +36,12 @@ function test(calibre, {
     connection,
     cookies: [
       {
-        "name": "X-Strain",
-        "value": strain,
-        "secure": true,
+        name: 'X-Strain',
+        value: strain,
+        secure: true,
         httpOnly: true,
-        "domain": URI.parse(url).host
-      }
+        domain: URI.parse(url).host,
+      },
     ],
   }).then(async ({ uuid }) => {
     const result = await calibre.Test.waitForTest(uuid);

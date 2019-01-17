@@ -34,8 +34,8 @@ describe('Integration Tests', () => {
           device: 'MotorolaMotoG4',
           connection: 'regular3G',
           strain: 'default',
-        }
-      ]
+        },
+      ],
     });
 
     assert.equal(results.length, 2);
@@ -45,5 +45,5 @@ describe('Integration Tests', () => {
     assert.equal(typeof r1.result, 'object');
     assert.ok(Array.isArray(r1.result.metrics));
     assert.equal(typeof r1.result.metrics[0].value, 'number');
-  }).timeout(1000*60*5);
+  }).timeout(1000 * 60 * 5);
 });
