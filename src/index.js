@@ -9,6 +9,8 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+const URI = require('uri-js');
+
 function init(token) {
   process.env.CALIBRE_API_TOKEN = token;
   let calibre;
@@ -32,12 +34,15 @@ function test(calibre, {
     location,
     device,
     connection,
-    cookies: [{
-      name: 'X-Strain',
-      value: strain,
-      secure: true,
-      httpOnly: true,
-    }],
+    cookies: [
+      {
+        "name": "X-Strain",
+        "value": strain,
+        "secure": true,
+        httpOnly: true,
+        "domain": URI.parse(url).host
+      }
+    ],
   }).then(async ({ uuid }) => {
     const result = await calibre.Test.waitForTest(uuid);
     return {
