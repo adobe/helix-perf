@@ -38,7 +38,16 @@ function test(calibre, {
       secure: true,
       httpOnly: true,
     }],
-  }).then(({ uuid }) => calibre.Test.waitForTest(uuid));
+  }).then(async ({ uuid }) => {
+    const result = await calibre.Test.waitForTest(uuid);
+    return {
+      test: {
+        url, location, device, connection, strain,
+      },
+      uuid,
+      result,
+    };
+  });
 }
 
 module.exports = async function main({
