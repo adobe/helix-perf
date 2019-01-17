@@ -7,25 +7,32 @@
 [![GitHub issues](https://img.shields.io/github/issues/adobe-rnd/new-nodejs-repository-template.svg)](https://github.com/adobe-rnd/new-nodejs-repository-template/issues)
 [![LGTM Code Quality Grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/adobe-rnd/new-nodejs-repository-template.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/adobe-rnd/new-nodejs-repository-template)
 
-> Template repository for nodejs module packages.
+> Microservice for getting Project Helix performance results
 
-## Development
+This microservice runs performance tests on a customer website using Calibreapp, but only if the customer has a valid Project Helix account.
 
+## Usage
 
-### Build
+Send a POST request with following (`Content-Type: application/json`-encoded) body parameters to `https://adobeioruntime.net/api/v1/web/helix/default/perf`:
 
-```bash
-npm install
-```
+* `service`: the service ID of your Fastly service config
+* `token`: a Fastly authentication token that has `global` permission on the service config
+* `tests`: an array of test specs, i.e. objects with following properties
+  * `url`: the URL to test
+  * `location`: the remote location to test from
+  * `device`: the device emulate during the test
+  * `connection`: the connection throttling settings
+  * `strain`: the strain or variant to test
 
-### Test
+## Developing Helix Perf
 
-```bash
-npm test
-```
+You need `node>=8.0.0` and `npm>=5.4.0`. Follow the typical `npm install`, `npm test` workflow.
 
-### Lint
+Contributions are highly welcome.
 
-```bash
-npm run lint
-```
+## Deploying Helix Perf
+
+Deploying Helix Perf requires the `wsk` command line client, authenticated to a namespace of your choice. For Project Helix, we use the `helix` namespace.
+
+Run `npm run deploy` to do a one-shot deploment of Helix Perf. All commits to master that pass the testing will be deployed automatically.
+
