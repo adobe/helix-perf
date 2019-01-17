@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 const URI = require('uri-js');
+const fastly = require('@adobe/fastly-native-promises');
 
 function init(token) {
   process.env.CALIBRE_API_TOKEN = token;
@@ -57,8 +58,18 @@ function test(calibre, {
 
 module.exports = async function main({
   CALIBRE_AUTH,
+  service,
+  token,
   tests = [],
 }) {
   const getcalibre = init(CALIBRE_AUTH);
-  return Promise.all(tests.map(spec => test(getcalibre(), spec)));
+  return fastly(token, service).readVersions()
+    .then(() => Promise.all(tests.map(spec => test(getcalibre(), spec))))
+    .catch((e) => {
+      /* eslint-disable-next-line no-console */
+      console.error(e);
+      return {
+        error: 'Unable to perform performance test. An error has been logged.',
+      };
+    });
 };

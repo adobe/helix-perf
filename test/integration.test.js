@@ -17,33 +17,46 @@ const condit = require('./condit');
 const index = require('../src/index');
 
 describe('Integration Tests', () => {
-  condit('Retrieve Performance results from Calibre', condit.hasenv('HLX_CALIBRE_AUTH'), async () => {
-    const results = await index({
-      CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
-      tests: [
-        {
-          url: 'https://www.project-helix.io',
-          location: 'London',
-          device: 'MotorolaMotoG4',
-          connection: 'regular3G',
-          strain: 'default',
-        },
-        {
-          url: 'https://www.adobe.io',
-          location: 'London',
-          device: 'MotorolaMotoG4',
-          connection: 'regular3G',
-          strain: 'default',
-        },
-      ],
-    });
+  it('Rejects attempts to consume service without authentication', (done) => {
+    index({}).then((result) => {
+      assert.ok(result.error);
+      done();
+    }).catch(() => done);
+  });
 
-    assert.equal(results.length, 2);
-    const r1 = results[0];
-    assert.equal(r1.test.url, 'https://www.project-helix.io');
-    assert.equal(typeof r1.uuid, 'string');
-    assert.equal(typeof r1.result, 'object');
-    assert.ok(Array.isArray(r1.result.metrics));
-    assert.equal(typeof r1.result.metrics[0].value, 'number');
-  }).timeout(1000 * 60 * 5);
+  condit(
+    'Retrieve Performance results from Calibre',
+    condit.hasenvs(['HLX_CALIBRE_AUTH', 'HLX_FASTLY_AUTH', 'HLX_FASTLY_NAMESPACE']),
+    async () => {
+      const results = await index({
+        CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
+        service: process.env.HLX_FASTLY_NAMESPACE,
+        token: process.env.HLX_FASTLY_AUTH,
+        tests: [
+          {
+            url: 'https://www.project-helix.io',
+            location: 'London',
+            device: 'MotorolaMotoG4',
+            connection: 'regular3G',
+            strain: 'default',
+          },
+          {
+            url: 'https://www.adobe.io',
+            location: 'London',
+            device: 'MotorolaMotoG4',
+            connection: 'regular3G',
+            strain: 'default',
+          },
+        ],
+      });
+
+      assert.equal(results.length, 2);
+      const r1 = results[0];
+      assert.equal(r1.test.url, 'https://www.project-helix.io');
+      assert.equal(typeof r1.uuid, 'string');
+      assert.equal(typeof r1.result, 'object');
+      assert.ok(Array.isArray(r1.result.metrics));
+      assert.equal(typeof r1.result.metrics[0].value, 'number');
+    },
+  ).timeout(1000 * 60 * 5);
 });

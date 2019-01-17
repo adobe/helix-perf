@@ -138,6 +138,9 @@ describe('Mocked Tests', () => {
         waitForTest: fakewait,
       },
     },
+    '@adobe/fastly-native-promises': () => ({
+      readVersions: sinon.fake.resolves(true),
+    }),
   });
 
   it('Works without arguments', async () => {
