@@ -118,8 +118,8 @@ workflows:
   build:
     jobs:
     - test-deploy:
-      requires:
-      - build
+        requires:
+        - build
     - build
     # the publish-pre-release jobs needs a $NPM_TOKEN environment to be setup and also have a
     # valid SSH_KEY added for the `github.com` host.
