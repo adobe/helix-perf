@@ -126,7 +126,7 @@ workflows:
     - deploy:
         requires:
         - build
-        - yesy-deploy
+        - test-deploy
         filters:
           branches:
             # rename to `master` once $NPM_TOKEN and github.com ssh key is setup.
