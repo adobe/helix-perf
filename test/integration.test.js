@@ -19,10 +19,40 @@ const index = require('../src/index');
 describe('Integration Tests', () => {
   it('Rejects attempts to consume service without authentication', (done) => {
     index({}).then((result) => {
-      assert.ok(result.error);
+      assert.equal(result.statusCode, 401);
       done();
     }).catch(() => done);
   });
+
+  condit(
+    'Fail when called with invalid configuration',
+    condit.hasenvs(['HLX_CALIBRE_AUTH', 'HLX_FASTLY_AUTH', 'HLX_FASTLY_NAMESPACE']),
+    async () => {
+      const results = await index({
+        CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
+        service: process.env.HLX_FASTLY_NAMESPACE,
+        token: process.env.HLX_FASTLY_AUTH,
+        tests: [
+          {
+            url: 'https://www.project-helix.io',
+            location: 'London',
+            device: 'Nokia7110',
+            connection: 'regular3G',
+            strain: 'default',
+          },
+          {
+            url: 'https://www.adobe.io',
+            location: 'London',
+            device: 'Nokia7110',
+            connection: 'regular3G',
+            strain: 'default',
+          },
+        ],
+      });
+
+      assert.equal(results.statusCode, 500);
+    },
+  ).timeout(1000 * 60 * 9);
 
   condit(
     'Retrieve Performance results from Calibre',

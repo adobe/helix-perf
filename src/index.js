@@ -64,12 +64,12 @@ module.exports = async function main({
 }) {
   const getcalibre = init(CALIBRE_AUTH);
   return fastly(token, service).readVersions()
-    .then(() => Promise.all(tests.map(spec => test(getcalibre(), spec))))
-    .catch((e) => {
-      /* eslint-disable-next-line no-console */
-      console.error(e);
-      return {
-        error: 'Unable to perform performance test. An error has been logged.',
-      };
-    });
+    .then(() => Promise.all(tests.map(spec => test(getcalibre(), spec))).catch(() => ({
+      statusCode: 500,
+      body: 'Unable to perfom test',
+    })))
+    .catch(() => ({
+      statusCode: 401,
+      body: 'Invalid credentials.',
+    }));
 };
