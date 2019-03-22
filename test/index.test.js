@@ -145,11 +145,12 @@ describe('Mocked Tests', () => {
 
   it('Works without arguments', async () => {
     const result = await index({ CALIBRE_AUTH: 'FAKE' });
-    assert.deepEqual(result, []);
+    assert.deepEqual(result.statusCode, 200);
   });
 
   it('Can run tests', async () => {
     const result = await index({
+      __ow_method: 'post',
       CALIBRE_AUTH: 'FAKE',
       tests: [
         {
@@ -168,27 +169,22 @@ describe('Mocked Tests', () => {
         },
       ],
     });
-    assert.deepEqual(result, [{
+    assert.deepEqual(result.body, ['170b278', '170b278']);
+  });
+
+  it('Can retrieve tests', async () => {
+    const result = await index({
+      __ow_method: 'post',
+      CALIBRE_AUTH: 'FAKE',
+      tests: ['170b278', '170b278'],
+    });
+    assert.deepEqual(result.body, [Object.assign({
       uuid: '170b278',
-      result: example,
-      test: {
-        url: 'https://www.project-helix.io',
-        location: 'London',
-        device: 'MotorolaMotoG4',
-        connection: 'regular3G',
-        strain: 'default',
-      },
-    },
-    {
-      uuid: '170b278',
-      result: example,
-      test: {
-        url: 'https://www.project-helix.io',
-        location: 'London',
-        device: 'MotorolaMotoG4',
-        connection: 'regular3G',
-        strain: 'default',
-      },
-    }]);
+    }, example),
+    Object.assign(
+      {
+        uuid: '170b278',
+      }, example,
+    )]);
   });
 });
