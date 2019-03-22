@@ -169,7 +169,7 @@ describe('Mocked Tests', () => {
         },
       ],
     });
-    assert.deepEqual(result, ['170b278', '170b278']);
+    assert.deepEqual(result.body, ['170b278', '170b278']);
   });
 
   it('Can retrieve tests', async () => {
@@ -178,7 +178,7 @@ describe('Mocked Tests', () => {
       CALIBRE_AUTH: 'FAKE',
       tests: ['170b278', '170b278'],
     });
-    assert.deepEqual(result, [Object.assign({
+    assert.deepEqual(result.body, [Object.assign({
       uuid: '170b278',
     }, example),
     Object.assign(

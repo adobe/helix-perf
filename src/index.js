@@ -89,11 +89,18 @@ module.exports = async function main({
   }
   if (tests.length > 0 && tests.reduce((p, uuid) => p && typeof uuid === 'string', true)) {
     return fastly(token, service).readVersions()
-      .then(() => Promise.all(tests.map(uuid => result(getcalibre(), uuid))).catch(e => ({
-        statusCode: 500,
-        body: 'Unable to retrieve test results',
-        error: e,
-      })))
+      .then(() => Promise.all(tests.map(uuid => result(getcalibre(), uuid)))
+        .then(res => ({
+          statusCode: 200,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: res,
+        }))
+        .catch(e => ({
+          statusCode: 500,
+          body: `Unable to retrieve test results ${e}`,
+        })))
       .catch(() => ({
         statusCode: 401,
         body: 'Invalid credentials.',
@@ -101,10 +108,18 @@ module.exports = async function main({
     // eslint-disable-next-line camelcase
   }
   return fastly(token, service).readVersions()
-    .then(() => Promise.all(tests.map(spec => test(getcalibre(), spec))).catch(() => ({
-      statusCode: 500,
-      body: 'Unable to perfom test',
-    })))
+    .then(() => Promise.all(tests.map(spec => test(getcalibre(), spec)))
+      .then(res => ({
+        statusCode: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: res,
+      }))
+      .catch(e => ({
+        statusCode: 500,
+        body: `Unable to perfom test ${e}`,
+      })))
     .catch(() => ({
       statusCode: 401,
       body: 'Invalid credentials.',

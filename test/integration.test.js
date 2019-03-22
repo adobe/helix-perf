@@ -63,6 +63,24 @@ describe('Integration Tests', () => {
   ).timeout(1000 * 60 * 9);
 
   condit(
+    'Fail to retrieve when called with invalid configuration',
+    condit.hasenvs(['HLX_CALIBRE_AUTH', 'HLX_FASTLY_AUTH', 'HLX_FASTLY_NAMESPACE']),
+    async () => {
+      const results = await index({
+        __ow_method: 'post',
+        CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
+        service: process.env.HLX_FASTLY_NAMESPACE,
+        token: process.env.HLX_FASTLY_AUTH,
+        tests: [
+          'nope', 'doesntexit',
+        ],
+      });
+
+      assert.equal(results.statusCode, 500);
+    },
+  ).timeout(1000 * 60 * 9);
+
+  condit(
     'Fail when called with invalid credentials',
     condit.hasenvs(['HLX_CALIBRE_AUTH', 'HLX_FASTLY_AUTH', 'HLX_FASTLY_NAMESPACE']),
     async () => {
@@ -136,7 +154,7 @@ describe('Integration Tests', () => {
         ],
       });
 
-      assert.equal(schedule.length, 2);
+      assert.equal(schedule.body.length, 2);
 
       let i = 0;
       // eslint-disable-next-line no-plusplus
@@ -144,15 +162,15 @@ describe('Integration Tests', () => {
         // eslint-disable-next-line no-await-in-loop
         const results = await index({
           __ow_method: 'post',
-          tests: schedule,
+          tests: schedule.body,
           CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
           service: process.env.HLX_FASTLY_NAMESPACE,
           token: process.env.HLX_FASTLY_AUTH,
         });
 
-        assert.equal(results.length, 2);
-        if (results.reduce((p, result) => p && typeof result === 'object', true)) {
-          const r1 = results[0];
+        assert.equal(results.body.length, 2);
+        if (results.body.reduce((p, result) => p && typeof result === 'object', true)) {
+          const r1 = results.body[0];
           assert.equal(r1.url, 'https://www.project-helix.io');
           assert.equal(typeof r1.uuid, 'string');
           assert.ok(Array.isArray(r1.metrics));
