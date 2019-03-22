@@ -36,6 +36,7 @@ describe('Integration Tests', () => {
     condit.hasenvs(['HLX_CALIBRE_AUTH', 'HLX_FASTLY_AUTH', 'HLX_FASTLY_NAMESPACE']),
     async () => {
       const results = await index({
+        __ow_method: 'post',
         CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
         service: process.env.HLX_FASTLY_NAMESPACE,
         token: process.env.HLX_FASTLY_AUTH,
@@ -66,6 +67,7 @@ describe('Integration Tests', () => {
     condit.hasenvs(['HLX_CALIBRE_AUTH', 'HLX_FASTLY_AUTH', 'HLX_FASTLY_NAMESPACE']),
     async () => {
       const results = await index({
+        __ow_method: 'post',
         CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
         service: 'wrong',
         token: 'fake',
@@ -85,6 +87,22 @@ describe('Integration Tests', () => {
             strain: 'default',
           },
         ],
+      });
+
+      assert.equal(results.statusCode, 401);
+    },
+  ).timeout(1000 * 60 * 9);
+
+  condit(
+    'Fail when retrieving with invalid credentials',
+    condit.hasenvs(['HLX_CALIBRE_AUTH', 'HLX_FASTLY_AUTH', 'HLX_FASTLY_NAMESPACE']),
+    async () => {
+      const results = await index({
+        __ow_method: 'post',
+        CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
+        service: 'wrong',
+        token: 'fake',
+        tests: ['one', 'two'],
       });
 
       assert.equal(results.statusCode, 401);
@@ -125,7 +143,7 @@ describe('Integration Tests', () => {
       while (i++ < 100) {
         // eslint-disable-next-line no-await-in-loop
         const results = await index({
-          __ow_method: 'get',
+          __ow_method: 'post',
           tests: schedule,
           CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
           service: process.env.HLX_FASTLY_NAMESPACE,

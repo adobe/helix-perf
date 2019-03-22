@@ -150,6 +150,7 @@ describe('Mocked Tests', () => {
 
   it('Can run tests', async () => {
     const result = await index({
+      __ow_method: 'post',
       CALIBRE_AUTH: 'FAKE',
       tests: [
         {
@@ -167,6 +168,15 @@ describe('Mocked Tests', () => {
           strain: 'default',
         },
       ],
+    });
+    assert.deepEqual(result, ['170b278', '170b278']);
+  });
+
+  it('Can retrieve tests', async () => {
+    const result = await index({
+      __ow_method: 'post',
+      CALIBRE_AUTH: 'FAKE',
+      tests: ['170b278', '170b278'],
     });
     assert.deepEqual(result, [Object.assign({
       uuid: '170b278',

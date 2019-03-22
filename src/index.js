@@ -75,7 +75,19 @@ module.exports = async function main({
   const getcalibre = init(CALIBRE_AUTH);
 
   // eslint-disable-next-line camelcase
-  if (__ow_method === 'get' && tests.length > 0) {
+  if (__ow_method === 'get') {
+    return {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'application/xml',
+      },
+      body: `<pingdom_http_custom_check>
+  <status>OK</status>
+  <response_time>${Math.abs(Date.now() - start)}</response_time>
+</pingdom_http_custom_check>`,
+    };
+  }
+  if (tests.length > 0 && tests.reduce((p, uuid) => p && typeof uuid === 'string', true)) {
     return fastly(token, service).readVersions()
       .then(() => Promise.all(tests.map(uuid => result(getcalibre(), uuid))).catch(e => ({
         statusCode: 500,
@@ -87,17 +99,6 @@ module.exports = async function main({
         body: 'Invalid credentials.',
       }));
     // eslint-disable-next-line camelcase
-  } if (__ow_method === 'get') {
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'application/xml',
-      },
-      body: `<pingdom_http_custom_check>
-  <status>OK</status>
-  <response_time>${Math.abs(Date.now() - start)}</response_time>
-</pingdom_http_custom_check>`,
-    };
   }
   return fastly(token, service).readVersions()
     .then(() => Promise.all(tests.map(spec => test(getcalibre(), spec))).catch(() => ({
