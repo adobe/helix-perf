@@ -44,16 +44,23 @@ function test(calibre, {
         domain: URI.parse(url).host,
       },
     ],
-  }).then(async ({ uuid }) => {
-    const result = await calibre.Test.waitForTest(uuid);
-    return {
-      test: {
-        url, location, device, connection, strain,
-      },
-      uuid,
-      result,
-    };
-  });
+  }).then(async ({ uuid }) => uuid);
+}
+
+async function result(calibre, uuid) {
+  const nothing = new Promise(((resolve) => {
+    // maximum response time for OpenWhisk is 60 seconds,
+    // so let's wait no longer than 45 seconds.
+    setTimeout(resolve, 1000 * 45, uuid);
+  }));
+
+  const testresult = calibre.Test.waitForTest(uuid);
+
+  const res = await Promise.race([nothing, testresult]);
+  if (typeof res === 'string') {
+    return uuid;
+  }
+  return res;
 }
 
 module.exports = async function main({
@@ -61,8 +68,37 @@ module.exports = async function main({
   service,
   token,
   tests = [],
+  // eslint-disable-next-line camelcase
+  __ow_method = 'get',
 }) {
+  const start = Date.now();
   const getcalibre = init(CALIBRE_AUTH);
+
+  // eslint-disable-next-line camelcase
+  if (__ow_method === 'get' && tests.length > 0) {
+    return fastly(token, service).readVersions()
+      .then(() => Promise.all(tests.map(uuid => result(getcalibre(), uuid))).catch(e => ({
+        statusCode: 500,
+        body: 'Unable to retrieve test results',
+        error: e,
+      })))
+      .catch(() => ({
+        statusCode: 401,
+        body: 'Invalid credentials.',
+      }));
+    // eslint-disable-next-line camelcase
+  } if (__ow_method === 'get') {
+    return {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'application/xml',
+      },
+      body: `<pingdom_http_custom_check>
+  <status>OK</status>
+  <response_time>${Math.abs(Date.now() - start)}</response_time>
+</pingdom_http_custom_check>`,
+    };
+  }
   return fastly(token, service).readVersions()
     .then(() => Promise.all(tests.map(spec => test(getcalibre(), spec))).catch(() => ({
       statusCode: 500,

@@ -18,8 +18,15 @@ const index = require('../src/index');
 
 describe('Integration Tests', () => {
   it('Rejects attempts to consume service without authentication', (done) => {
-    index({}).then((result) => {
+    index({ __ow_method: 'post' }).then((result) => {
       assert.equal(result.statusCode, 401);
+      done();
+    }).catch(() => done);
+  });
+
+  it('Returns a status when called standalone', (done) => {
+    index({ __ow_method: 'get' }).then((result) => {
+      assert.equal(result.statusCode, 200);
       done();
     }).catch(() => done);
   });
@@ -55,10 +62,41 @@ describe('Integration Tests', () => {
   ).timeout(1000 * 60 * 9);
 
   condit(
-    'Retrieve Performance results from Calibre',
+    'Fail when called with invalid credentials',
     condit.hasenvs(['HLX_CALIBRE_AUTH', 'HLX_FASTLY_AUTH', 'HLX_FASTLY_NAMESPACE']),
     async () => {
       const results = await index({
+        CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
+        service: 'wrong',
+        token: 'fake',
+        tests: [
+          {
+            url: 'https://www.project-helix.io',
+            location: 'London',
+            device: 'Nokia7110',
+            connection: 'regular3G',
+            strain: 'default',
+          },
+          {
+            url: 'https://www.adobe.io',
+            location: 'London',
+            device: 'Nokia7110',
+            connection: 'regular3G',
+            strain: 'default',
+          },
+        ],
+      });
+
+      assert.equal(results.statusCode, 401);
+    },
+  ).timeout(1000 * 60 * 9);
+
+  condit(
+    'Retrieve Performance results from Calibre',
+    condit.hasenvs(['HLX_CALIBRE_AUTH', 'HLX_FASTLY_AUTH', 'HLX_FASTLY_NAMESPACE']),
+    async () => {
+      const schedule = await index({
+        __ow_method: 'post',
         CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
         service: process.env.HLX_FASTLY_NAMESPACE,
         token: process.env.HLX_FASTLY_AUTH,
@@ -80,13 +118,34 @@ describe('Integration Tests', () => {
         ],
       });
 
-      assert.equal(results.length, 2);
-      const r1 = results[0];
-      assert.equal(r1.test.url, 'https://www.project-helix.io');
-      assert.equal(typeof r1.uuid, 'string');
-      assert.equal(typeof r1.result, 'object');
-      assert.ok(Array.isArray(r1.result.metrics));
-      assert.equal(typeof r1.result.metrics[0].value, 'number');
+      assert.equal(schedule.length, 2);
+
+      let i = 0;
+      // eslint-disable-next-line no-plusplus
+      while (i++ < 100) {
+        // eslint-disable-next-line no-await-in-loop
+        const results = await index({
+          __ow_method: 'get',
+          tests: schedule,
+          CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
+          service: process.env.HLX_FASTLY_NAMESPACE,
+          token: process.env.HLX_FASTLY_AUTH,
+        });
+
+        assert.equal(results.length, 2);
+        if (results.reduce((p, result) => p && typeof result === 'object', true)) {
+          const r1 = results[0];
+          assert.equal(r1.url, 'https://www.project-helix.io');
+          assert.equal(typeof r1.uuid, 'string');
+          assert.ok(Array.isArray(r1.metrics));
+          assert.equal(typeof r1.metrics[0].value, 'number');
+
+          break;
+        } else {
+          // eslint-disable-next-line no-console
+          console.log(`results have not yet arrived after ${i} iterations`);
+        }
+      }
     },
   ).timeout(1000 * 60 * 9);
 });
