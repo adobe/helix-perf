@@ -26,7 +26,7 @@
   "homepage": "https://github.com/adobe-rnd/new-nodejs-repository-template#readme",
   "dependencies": {
     "@adobe/fastly-native-promises": "^1.8.1",
-    "calibre": "^1.2.3",
+    "calibre": "^2.0.0",
     "uri-js": "^4.2.2"
   },
   "devDependencies": {
