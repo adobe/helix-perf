@@ -4,9 +4,9 @@
   "description": "Helix Performance",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha -i -g Post-Deployment",
-    "test-ci": "nyc --reporter=text --reporter=lcov --check-coverage --branches 100 --statements 100 --lines 100 mocha --reporter xunit --reporter-options output=./junit/test-results.xml -i -g Post-Deployment && codecov",
-    "test-postdeploy": "mocha --reporter xunit --reporter-options output=./junit/test-results.xml -g Post-Deployment",
+    "test": "nyc mocha -i -g Post-Deployment --exit",
+    "test-ci": "nyc --reporter=text --reporter=lcov --check-coverage --branches 100 --statements 100 --lines 100 mocha --reporter xunit --reporter-options output=./junit/test-results.xml -i -g Post-Deployment  --exit && codecov",
+    "test-postdeploy": "mocha --reporter xunit --reporter-options output=./junit/test-results.xml -g Post-Deployment  --exit",
     "semantic-release": "semantic-release",
     "semantic-prepare": "node ./build/prepare.js",
     "lint": "./node_modules/.bin/eslint .",
