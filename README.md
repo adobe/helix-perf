@@ -14,7 +14,7 @@ This microservice runs performance tests on a customer website using Calibreapp,
 
 ## Usage
 
-Send a POST request with following (`Content-Type: application/json`-encoded) body parameters to `https://adobeioruntime.net/api/v1/web/helix/default/perf`:
+Send a POST request with following (`Content-Type: application/json`-encoded) body parameters to `https://adobeioruntime.net/api/v1/web/helix/helix-services/perf@v1`:
 
 * `service`: the service ID of your Fastly service config
 * `token`: a Fastly authentication token that has `global` permission on the service config
