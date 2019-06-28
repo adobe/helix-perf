@@ -4,32 +4,40 @@
   "description": "Helix Performance",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=text --reporter=lcov --check-coverage --branches 100 --statements 100 --lines 100 mocha --exit",
+    "test": "nyc mocha -i -g Post-Deployment --exit",
+    "test-ci": "npm run lint && nyc --reporter=text --reporter=lcov --check-coverage --branches 100 --statements 100 --lines 100 mocha --reporter xunit --reporter-options output=./junit/test-results.xml -i -g Post-Deployment  --exit && codecov",
+    "test-postdeploy": "mocha --reporter xunit --reporter-options output=./junit/test-results.xml -g Post-Deployment  --exit",
+    "semantic-release": "semantic-release",
+    "semantic-prepare": "node ./build/prepare.js",
     "lint": "./node_modules/.bin/eslint .",
-    "junit": "mocha --exit -R mocha-junit-reporter",
-    "preversion": "npm run junit",
-    "postversion": "git push origin master --follow-tags",
-    "zip": "npm ls --prod --parseable | grep node_modules | sed -e 's/.*node_modules/node_modules/' | xargs zip perf.zip -x \"node_modules/calibre/bin/*\" -r src package.json index.js",
-    "deploy": "npm run zip && wsk action update perf perf.zip --kind nodejs:10 --web true --web-secure false --timeout 300000 -p CALIBRE_AUTH \"$CALIBRE_AUTH\"",
-    "test-deploy": "npm run zip && wsk action update perf-test perf.zip --kind nodejs:10 --web true --web-secure false --timeout 300000 -p CALIBRE_AUTH \"$CALIBRE_AUTH\"",
-    "delete-git-tag": "git tag -d v$npm_package_version && git push origin :v$npm_package_version"
+    "build": "wsk-builder -v --entryFile index.js",
+    "deploy": "wsk-builder -v --deploy --test --entryFile index.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/adobe-rnd/new-nodejs-repository-template"
+    "url": "https://github.com/adobe/helix-perf"
   },
   "author": "",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/adobe-rnd/new-nodejs-repository-template/issues"
+    "url": "https://github.com/adobe/helix-perf/issues"
   },
-  "homepage": "https://github.com/adobe-rnd/new-nodejs-repository-template#readme",
+  "homepage": "https://github.com/adobe/helix-perf#readme",
   "dependencies": {
     "@adobe/fastly-native-promises": "^1.8.1",
+    "@adobe/helix-pingdom-status": "^1.4.0",
+    "epsagon": "^1.27.2",
     "calibre": "^2.0.0",
     "uri-js": "^4.2.2"
   },
   "devDependencies": {
+    "@adobe/openwhisk-action-builder": "^1.1.0",
+    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/commit-analyzer": "^6.2.0",
+    "@semantic-release/exec": "^3.3.5",
+    "@semantic-release/git": "^7.0.14",
+    "@semantic-release/github": "^5.4.0",
+    "@semantic-release/release-notes-generator": "^7.2.1",
     "ajv": "^6.5.3",
     "codecov": "^3.0.2",
     "eslint": "^5.4.0",
@@ -45,7 +53,9 @@
     "mocha-parallel-tests": "^2.0.3",
     "nyc": "^14.1.0",
     "proxyquire": "^2.1.0",
-    "sinon": "^7.3.2"
+    "sinon": "^7.3.2",
+    "semantic-release": "^15.13.18"
   },
-  "snyk": true
+  "snyk": true,
+  "wsk": {}
 }
