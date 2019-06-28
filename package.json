@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-perf",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Helix Performance",
   "main": "index.js",
   "scripts": {
@@ -57,5 +57,7 @@
     "semantic-release": "^15.13.18"
   },
   "snyk": true,
-  "wsk": {}
+  "wsk": {
+    "name": "helix-services/perf@1.0.0"
+  }
 }
