@@ -1,11 +1,11 @@
 # Repository Template
 
 ## Status
-[![codecov](https://img.shields.io/codecov/c/github/adobe-rnd/new-nodejs-repository-template.svg)](https://codecov.io/gh/adobe-rnd/new-nodejs-repository-template)
-[![CircleCI](https://img.shields.io/circleci/project/github/adobe-rnd/new-nodejs-repository-template.svg)](https://circleci.com/gh/adobe-rnd/new-nodejs-repository-template)
-[![GitHub license](https://img.shields.io/github/license/adobe-rnd/new-nodejs-repository-template.svg)](https://github.com/adobe-rnd/new-nodejs-repository-template/blob/master/LICENSE.txt)
-[![GitHub issues](https://img.shields.io/github/issues/adobe-rnd/new-nodejs-repository-template.svg)](https://github.com/adobe-rnd/new-nodejs-repository-template/issues)
-[![LGTM Code Quality Grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/adobe-rnd/new-nodejs-repository-template.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/adobe-rnd/new-nodejs-repository-template) 
+[![codecov](https://img.shields.io/codecov/c/github/adobe/helix-perf.svg)](https://codecov.io/gh/adobe/helix-perf)
+[![CircleCI](https://img.shields.io/circleci/project/github/adobe/helix-perf.svg)](https://circleci.com/gh/adobe/helix-perf)
+[![GitHub license](https://img.shields.io/github/license/adobe/helix-perf.svg)](https://github.com/adobe/helix-perf/blob/master/LICENSE.txt)
+[![GitHub issues](https://img.shields.io/github/issues/adobe/helix-perf.svg)](https://github.com/adobe/helix-perf/issues)
+[![LGTM Code Quality Grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/adobe/helix-perf.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/adobe/helix-perf) 
 [![Greenkeeper badge](https://badges.greenkeeper.io/adobe/helix-perf.svg)](https://greenkeeper.io/)
 
 > Microservice for getting Project Helix performance results
