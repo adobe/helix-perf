@@ -14,5 +14,5 @@ const { wrap } = require('@adobe/helix-pingdom-status');
 const main = require('./src/index');
 
 module.exports.main = wrap(main, {
-  calibre: 'https://calibreapp.com/graphql'
-})
+  calibre: 'https://calibreapp.com/graphql',
+});
