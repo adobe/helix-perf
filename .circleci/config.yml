@@ -70,7 +70,7 @@ jobs:
 
     - run:
         name: Set Google Token
-        command: wsk action update helix-services/`node -e "console.log(require('./package.json').name.replace('@adobe/helix-', ''))"`@`node -e "console.log(require('./package.json').version)"` --timeout 60000 -p CALIBRE_AUTH $CALIBRE_AUTH
+        command: wsk action update helix-services/`node -e "console.log(require('./package.json').name.replace('@adobe/helix-', ''))"`@`node -e "console.log(require('./package.json').version)"` --timeout 300000 -p CALIBRE_AUTH $CALIBRE_AUTH
 
     - run:
         name: Post-Deployment Integration Test
@@ -81,7 +81,7 @@ jobs:
 
     - run:
         name: Set Epsagon Token and Google Token
-        command: wsk action update helix-services/`node -e "console.log(require('./package.json').name.replace('@adobe/helix-', ''))"`@`node -e "console.log(require('./package.json').version)"` -p EPSAGON_TOKEN $EPSAGON_TOKEN  --timeout 60000 -p CALIBRE_AUTH $CALIBRE_AUTH
+        command: wsk action update helix-services/`node -e "console.log(require('./package.json').name.replace('@adobe/helix-', ''))"`@`node -e "console.log(require('./package.json').version)"` -p EPSAGON_TOKEN $EPSAGON_TOKEN  --timeout 300000 -p CALIBRE_AUTH $CALIBRE_AUTH
 
     - run:
         name: Link Sequence (Latest)
@@ -114,7 +114,7 @@ jobs:
 
     - run:
         name: Set Google Token
-        command: wsk action update helix-services/`node -e "console.log(require('./package.json').name.replace('@adobe/helix-', ''))"`@ci$CIRCLE_BUILD_NUM -p  --timeout 60000 -p CALIBRE_AUTH $CALIBRE_AUTH
+        command: wsk action update helix-services/`node -e "console.log(require('./package.json').name.replace('@adobe/helix-', ''))"`@ci$CIRCLE_BUILD_NUM -p  --timeout 300000 -p CALIBRE_AUTH $CALIBRE_AUTH
 
     - run:
         name: Post-Deployment Integration Test
@@ -122,7 +122,7 @@ jobs:
         
     - run:
         name: Set Epsagon Token and Google Token
-        command: wsk action update helix-services/`node -e "console.log(require('./package.json').name.replace('@adobe/helix-', ''))"`@ci$CIRCLE_BUILD_NUM -p EPSAGON_TOKEN $EPSAGON_TOKEN   --timeout 60000 -p CALIBRE_AUTH $CALIBRE_AUTH
+        command: wsk action update helix-services/`node -e "console.log(require('./package.json').name.replace('@adobe/helix-', ''))"`@ci$CIRCLE_BUILD_NUM -p EPSAGON_TOKEN $EPSAGON_TOKEN   --timeout 300000 -p CALIBRE_AUTH $CALIBRE_AUTH
 
     - store_test_results:
         path: junit
