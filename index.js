@@ -11,8 +11,13 @@
  */
 
 const { wrap } = require('@adobe/helix-pingdom-status');
+const { openWhiskWrapper } = require('epsagon');
 const main = require('./src/index');
 
-module.exports.main = wrap(main, {
+module.exports.main = wrap(openWhiskWrapper(main, {
+  token_param: 'EPSAGON_TOKEN',
+  appName: 'Helix Services',
+  metadataOnly: false, // Optional, send more trace data
+}), {
   calibre: 'https://calibreapp.com/graphql',
 });
