@@ -25,7 +25,7 @@
   "homepage": "https://github.com/adobe/helix-perf#readme",
   "dependencies": {
     "@adobe/fastly-native-promises": "^1.10.0",
-    "@adobe/helix-pingdom-status": "^1.4.0",
+    "@adobe/helix-pingdom-status": "^1.4.1",
     "calibre": "^2.0.0",
     "epsagon": "^1.27.2",
     "uri-js": "^4.2.2"
