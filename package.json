@@ -11,7 +11,7 @@
     "semantic-prepare": "node ./build/prepare.js",
     "lint": "./node_modules/.bin/eslint .",
     "build": "wsk-builder -v --entryFile index.js",
-    "deploy": "wsk-builder -v --deploy --test --entryFile index.js"
+    "deploy": "wsk-builder -v --deploy --test --entryFile index.js -p EPSAGON_TOKEN=$EPSAGON_TOKEN"
   },
   "repository": {
     "type": "git",
@@ -26,12 +26,13 @@
   "dependencies": {
     "@adobe/fastly-native-promises": "^1.10.0",
     "@adobe/helix-pingdom-status": "^1.4.1",
+    "@adobe/openwhisk-action-builder": "^1.0.2",
     "calibre": "^2.0.0",
     "epsagon": "^1.27.2",
     "uri-js": "^4.2.2"
   },
   "devDependencies": {
-    "@adobe/openwhisk-action-builder": "^1.1.0",
+    "@adobe/helix-shared": "^1.5.1",
     "@semantic-release/changelog": "^3.0.4",
     "@semantic-release/commit-analyzer": "^6.2.0",
     "@semantic-release/exec": "^3.3.5",
