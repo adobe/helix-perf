@@ -26,9 +26,9 @@
   "dependencies": {
     "@adobe/fastly-native-promises": "^1.10.0",
     "@adobe/helix-pingdom-status": "^1.4.1",
-    "@adobe/openwhisk-action-builder": "^1.0.2",
-    "calibre": "^2.0.0",
-    "epsagon": "^1.27.2",
+    "@adobe/openwhisk-action-builder": "^1.1.1",
+    "calibre": "^2.2.1",
+    "epsagon": "^1.29.0",
     "uri-js": "^4.2.2"
   },
   "devDependencies": {
@@ -39,7 +39,7 @@
     "@semantic-release/git": "^7.0.16",
     "@semantic-release/github": "^5.4.2",
     "@semantic-release/release-notes-generator": "^7.2.1",
-    "ajv": "^6.10.0",
+    "ajv": "^6.10.1",
     "codecov": "^3.5.0",
     "eslint": "^6.0.1",
     "eslint-config-airbnb": "^17.1.1",
