@@ -1,4 +1,4 @@
-# Repository Template
+# Helix peformance testing
 
 ## Status
 [![codecov](https://img.shields.io/codecov/c/github/adobe/helix-perf.svg)](https://codecov.io/gh/adobe/helix-perf)
