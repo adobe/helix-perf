@@ -12,3 +12,19 @@ patch:
         patched: '2019-07-10T03:03:58.767Z'
     - '@adobe/fastly-native-promises > request-promise-native > request-promise-core > lodash':
         patched: '2019-07-10T03:03:58.767Z'
+    - snyk > snyk-nuget-plugin > lodash:
+        patched: '2019-07-11T06:02:30.321Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2019-07-11T06:02:30.321Z'
+    - snyk > inquirer > lodash:
+        patched: '2019-07-11T06:02:30.321Z'
+    - snyk > snyk-config > lodash:
+        patched: '2019-07-11T06:02:30.321Z'
+    - snyk > snyk-nodejs-lockfile-parser > lodash:
+        patched: '2019-07-11T06:02:30.321Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-07-11T06:02:30.321Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-07-11T06:02:30.321Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-07-11T06:02:30.321Z'
