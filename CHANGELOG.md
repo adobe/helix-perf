@@ -1,3 +1,12 @@
+## [1.0.1](https://github.com/adobe/helix-perf/compare/v1.0.0...v1.0.1) (2019-07-11)
+
+
+### Bug Fixes
+
+* **epsagon:** ensure that epsagon integration is only loaded when token is present ([f6affb2](https://github.com/adobe/helix-perf/commit/f6affb2)), closes [#35](https://github.com/adobe/helix-perf/issues/35)
+* **package:** use latest pingdom-status 1.4.1 ([#33](https://github.com/adobe/helix-perf/issues/33)) ([bcf801f](https://github.com/adobe/helix-perf/commit/bcf801f))
+* **status:** use latest pingdom-status@1.4.2 ([ae1efca](https://github.com/adobe/helix-perf/commit/ae1efca))
+
 # 1.0.0 (2019-06-28)
 
 
