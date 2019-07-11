@@ -11,7 +11,9 @@
     "semantic-prepare": "node ./build/prepare.js",
     "lint": "./node_modules/.bin/eslint .",
     "build": "wsk-builder -v --entryFile index.js",
-    "deploy": "wsk-builder -v --deploy --test --entryFile index.js -p EPSAGON_TOKEN=$EPSAGON_TOKEN"
+    "deploy": "wsk-builder -v --deploy --test --entryFile index.js -p EPSAGON_TOKEN=$EPSAGON_TOKEN",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
