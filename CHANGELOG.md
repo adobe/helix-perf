@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/adobe/helix-perf/compare/v1.0.1...v1.0.2) (2019-07-24)
+
+
+### Bug Fixes
+
+* **package:** update @adobe/helix-pingdom-status to version 2.0.0 ([56cffb4](https://github.com/adobe/helix-perf/commit/56cffb4))
+
 ## [1.0.1](https://github.com/adobe/helix-perf/compare/v1.0.0...v1.0.1) (2019-07-11)
 
 
