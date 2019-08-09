@@ -12,8 +12,6 @@
 
 /* eslint-env mocha */
 
-'use strict';
-
 const assert = require('assert');
 const proxyquire = require('proxyquire').noCallThru();
 const sinon = require('sinon');
@@ -131,7 +129,7 @@ describe('Mocked Tests', () => {
 
   const fakecreate = sinon.fake.resolves({ uuid: '170b278' });
   const fakewait = sinon.fake.resolves(example);
-  const index = proxyquire('../src/index', {
+  const perf = proxyquire('../src/perf', {
     calibre: {
       Test: {
         create: fakecreate,
@@ -144,12 +142,12 @@ describe('Mocked Tests', () => {
   });
 
   it('Works without arguments', async () => {
-    const result = await index({ CALIBRE_AUTH: 'FAKE' });
+    const result = await perf({ CALIBRE_AUTH: 'FAKE' });
     assert.deepEqual(result.statusCode, 200);
   });
 
   it('Can run tests', async () => {
-    const result = await index({
+    const result = await perf({
       __ow_method: 'post',
       CALIBRE_AUTH: 'FAKE',
       tests: [
@@ -173,7 +171,7 @@ describe('Mocked Tests', () => {
   });
 
   it('Can retrieve tests', async () => {
-    const result = await index({
+    const result = await perf({
       __ow_method: 'post',
       CALIBRE_AUTH: 'FAKE',
       tests: ['170b278', '170b278'],

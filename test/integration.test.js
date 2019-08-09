@@ -14,19 +14,12 @@
 
 const assert = require('assert');
 const condit = require('./condit');
-const index = require('../src/index');
+const perf = require('../src/perf');
 
 describe('Integration Tests', () => {
   it('Rejects attempts to consume service without authentication', (done) => {
-    index({ __ow_method: 'post' }).then((result) => {
+    perf({ __ow_method: 'post' }).then((result) => {
       assert.equal(result.statusCode, 401);
-      done();
-    }).catch(() => done);
-  });
-
-  it('Returns a status when called standalone', (done) => {
-    index({ __ow_method: 'get' }).then((result) => {
-      assert.equal(result.statusCode, 200);
       done();
     }).catch(() => done);
   });
@@ -35,9 +28,9 @@ describe('Integration Tests', () => {
     'Fail when called with invalid configuration',
     condit.hasenvs(['HLX_CALIBRE_AUTH', 'HLX_FASTLY_AUTH', 'HLX_FASTLY_NAMESPACE']),
     async () => {
-      const results = await index({
+      const results = await perf({
         __ow_method: 'post',
-        CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
+        CALIBRE_API_TOKEN: process.env.HLX_CALIBRE_AUTH,
         service: process.env.HLX_FASTLY_NAMESPACE,
         token: process.env.HLX_FASTLY_AUTH,
         tests: [
@@ -66,9 +59,9 @@ describe('Integration Tests', () => {
     'Fail to retrieve when called with invalid configuration',
     condit.hasenvs(['HLX_CALIBRE_AUTH', 'HLX_FASTLY_AUTH', 'HLX_FASTLY_NAMESPACE']),
     async () => {
-      const results = await index({
+      const results = await perf({
         __ow_method: 'post',
-        CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
+        CALIBRE_API_TOKEN: process.env.HLX_CALIBRE_AUTH,
         service: process.env.HLX_FASTLY_NAMESPACE,
         token: process.env.HLX_FASTLY_AUTH,
         tests: [
@@ -84,9 +77,9 @@ describe('Integration Tests', () => {
     'Fail when called with invalid credentials',
     condit.hasenvs(['HLX_CALIBRE_AUTH', 'HLX_FASTLY_AUTH', 'HLX_FASTLY_NAMESPACE']),
     async () => {
-      const results = await index({
+      const results = await perf({
         __ow_method: 'post',
-        CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
+        CALIBRE_API_TOKEN: process.env.HLX_CALIBRE_AUTH,
         service: 'wrong',
         token: 'fake',
         tests: [
@@ -115,9 +108,9 @@ describe('Integration Tests', () => {
     'Fail when retrieving with invalid credentials',
     condit.hasenvs(['HLX_CALIBRE_AUTH', 'HLX_FASTLY_AUTH', 'HLX_FASTLY_NAMESPACE']),
     async () => {
-      const results = await index({
+      const results = await perf({
         __ow_method: 'post',
-        CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
+        CALIBRE_API_TOKEN: process.env.HLX_CALIBRE_AUTH,
         service: 'wrong',
         token: 'fake',
         tests: ['one', 'two'],
@@ -131,9 +124,9 @@ describe('Integration Tests', () => {
     'Retrieve Performance results from Calibre',
     condit.hasenvs(['HLX_CALIBRE_AUTH', 'HLX_FASTLY_AUTH', 'HLX_FASTLY_NAMESPACE']),
     async () => {
-      const schedule = await index({
+      const schedule = await perf({
         __ow_method: 'post',
-        CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
+        CALIBRE_API_TOKEN: process.env.HLX_CALIBRE_AUTH,
         service: process.env.HLX_FASTLY_NAMESPACE,
         token: process.env.HLX_FASTLY_AUTH,
         tests: [
@@ -160,10 +153,10 @@ describe('Integration Tests', () => {
       // eslint-disable-next-line no-plusplus
       while (i++ < 100) {
         // eslint-disable-next-line no-await-in-loop
-        const results = await index({
+        const results = await perf({
           __ow_method: 'post',
           tests: schedule.body,
-          CALIBRE_AUTH: process.env.HLX_CALIBRE_AUTH,
+          CALIBRE_API_TOKEN: process.env.HLX_CALIBRE_AUTH,
           service: process.env.HLX_FASTLY_NAMESPACE,
           token: process.env.HLX_FASTLY_AUTH,
         });
