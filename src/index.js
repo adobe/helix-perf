@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Adobe. All rights reserved.
+ * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -9,119 +9,56 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const URI = require('uri-js');
-const fastly = require('@adobe/fastly-native-promises');
+const { wrap } = require('@adobe/helix-pingdom-status');
+const { logger: createLogger } = require('@adobe/openwhisk-action-builder/src/logging');
+const perf = require('./perf.js');
 
-function init(token) {
-  process.env.CALIBRE_API_TOKEN = token;
-  let calibre;
-  return () => {
-    if (calibre) {
-      return calibre;
-    }
-    // calibre loads the environment variables at require-time
-    // so we delay loading until called.
-    /* eslint-disable global-require */
-    calibre = require('calibre');
-    return calibre;
-  };
-}
+let log;
 
-function test(calibre, {
-  url, location, device, connection, strain,
-}) {
-  return calibre.Test.create({
-    url,
-    location,
-    device,
-    connection,
-    cookies: [
-      {
-        name: 'X-Strain',
-        value: strain,
-        secure: true,
-        httpOnly: true,
-        domain: URI.parse(url).host,
-      },
-    ],
-  }).then(async ({ uuid }) => uuid);
-}
-
-async function result(calibre, uuid) {
-  const nothing = new Promise(((resolve) => {
-    // maximum response time for OpenWhisk is 60 seconds,
-    // so let's wait no longer than 45 seconds.
-    setTimeout(resolve, 1000 * 45, uuid);
-  }));
-
-  const testresult = calibre.Test.waitForTest(uuid);
-
-  const res = await Promise.race([nothing, testresult]);
-  if (typeof res === 'string') {
-    return uuid;
+/**
+ * Runs the action by wrapping the `perf` function with the pingdom-status utility.
+ * Additionally, if a EPSAGON_TOKEN is configured, the epsagon tracers are instrumented.
+ * @param params Action params
+ * @returns {Promise<*>} The response
+ */
+async function run(params) {
+  let action = perf;
+  if (params && params.EPSAGON_TOKEN) {
+    // ensure that epsagon is only required, if a token is present. this is to avoid invoking their
+    // patchers otherwise.
+    // eslint-disable-next-line global-require
+    const { openWhiskWrapper } = require('epsagon');
+    log.info('instrumenting epsagon.');
+    action = openWhiskWrapper(action, {
+      token_param: 'EPSAGON_TOKEN',
+      appName: 'Helix Services',
+      metadataOnly: false, // Optional, send more trace data
+    });
   }
-  return res;
+  return wrap(action, { calibre: 'https://calibreapp.com/graphql' })(params);
 }
 
-module.exports = async function main({
-  CALIBRE_AUTH,
-  service,
-  token,
-  tests = [],
-  // eslint-disable-next-line camelcase
-  __ow_method = 'get',
-}) {
-  const start = Date.now();
-  const getcalibre = init(CALIBRE_AUTH);
-
-  // eslint-disable-next-line camelcase
-  if (__ow_method === 'get') {
+/**
+ * Main function called by the openwhisk invoker.
+ * @param params Action params
+ * @param logger The logger.
+ * @returns {Promise<*>} The response
+ */
+async function main(params, logger = log) {
+  try {
+    log = createLogger(params, logger);
+    const result = await run(params);
+    if (log.flush) {
+      log.flush(); // don't wait
+    }
+    return result;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
     return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'application/xml',
-      },
-      body: `<pingdom_http_custom_check>
-  <status>OK</status>
-  <response_time>${Math.abs(Date.now() - start)}</response_time>
-</pingdom_http_custom_check>`,
+      statusCode: e.statusCode || 500,
     };
   }
-  if (tests.length > 0 && tests.reduce((p, uuid) => p && typeof uuid === 'string', true)) {
-    return fastly(token, service).readVersions()
-      .then(() => Promise.all(tests.map(uuid => result(getcalibre(), uuid)))
-        .then(res => ({
-          statusCode: 200,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: res,
-        }))
-        .catch(e => ({
-          statusCode: 500,
-          body: `Unable to retrieve test results ${e}`,
-        })))
-      .catch(() => ({
-        statusCode: 401,
-        body: 'Invalid credentials.',
-      }));
-    // eslint-disable-next-line camelcase
-  }
-  return fastly(token, service).readVersions()
-    .then(() => Promise.all(tests.map(spec => test(getcalibre(), spec)))
-      .then(res => ({
-        statusCode: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: res,
-      }))
-      .catch(e => ({
-        statusCode: 500,
-        body: `Unable to perfom test ${e}`,
-      })))
-    .catch(() => ({
-      statusCode: 401,
-      body: 'Invalid credentials.',
-    }));
-};
+}
+
+module.exports.main = main;
