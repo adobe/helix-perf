@@ -1,3 +1,11 @@
+## [1.0.4](https://github.com/adobe/helix-perf/compare/v1.0.3...v1.0.4) (2019-08-10)
+
+
+### Bug Fixes
+
+* **params:** rename CALIBRE_AUTH to CALIBRE_API_TOKEN ([#48](https://github.com/adobe/helix-perf/issues/48)) ([59f5b31](https://github.com/adobe/helix-perf/commit/59f5b31))
+* **release:** use correct release file ([a1771a4](https://github.com/adobe/helix-perf/commit/a1771a4))
+
 ## [1.0.3](https://github.com/adobe/helix-perf/compare/v1.0.2...v1.0.3) (2019-07-26)
 
 
