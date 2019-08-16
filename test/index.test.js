@@ -176,13 +176,9 @@ describe('Mocked Tests', () => {
       CALIBRE_AUTH: 'FAKE',
       tests: ['170b278', '170b278'],
     });
-    assert.deepEqual(result.body, [Object.assign({
-      uuid: '170b278',
-    }, example),
-    Object.assign(
+    assert.deepEqual(result.body, [{ uuid: '170b278', ...example },
       {
-        uuid: '170b278',
-      }, example,
-    )]);
+        uuid: '170b278', ...example,
+      }]);
   });
 });

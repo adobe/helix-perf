@@ -72,15 +72,15 @@ async function perf({
   const getcalibre = init(CALIBRE_API_TOKEN);
   if (tests.length > 0 && tests.reduce((p, uuid) => p && typeof uuid === 'string', true)) {
     return fastly(token, service).readVersions()
-      .then(() => Promise.all(tests.map(uuid => result(getcalibre(), uuid)))
-        .then(res => ({
+      .then(() => Promise.all(tests.map((uuid) => result(getcalibre(), uuid)))
+        .then((res) => ({
           statusCode: 200,
           headers: {
             'Content-Type': 'application/json',
           },
           body: res,
         }))
-        .catch(e => ({
+        .catch((e) => ({
           statusCode: 500,
           body: `Unable to retrieve test results ${e}`,
         })))
@@ -91,15 +91,15 @@ async function perf({
     // eslint-disable-next-line camelcase
   }
   return fastly(token, service).readVersions()
-    .then(() => Promise.all(tests.map(spec => test(getcalibre(), spec)))
-      .then(res => ({
+    .then(() => Promise.all(tests.map((spec) => test(getcalibre(), spec)))
+      .then((res) => ({
         statusCode: 200,
         headers: {
           'Content-Type': 'application/json',
         },
         body: res,
       }))
-      .catch(e => ({
+      .catch((e) => ({
         statusCode: 500,
         body: `Unable to perfom test ${e}`,
       })))
