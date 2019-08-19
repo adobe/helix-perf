@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/adobe/helix-perf/compare/v1.0.4...v1.0.5) (2019-08-19)
+
+
+### Bug Fixes
+
+* **package:** update @adobe/openwhisk-action-builder to version 2.0.0 ([69235d9](https://github.com/adobe/helix-perf/commit/69235d9))
+
 ## [1.0.4](https://github.com/adobe/helix-perf/compare/v1.0.3...v1.0.4) (2019-08-10)
 
 
