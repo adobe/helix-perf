@@ -13,9 +13,7 @@
     "deploy-ci": "wsk-builder -v --deploy --test=/_status_check/pingdom.xml --pkgVersion=ci$CIRCLE_BUILD_NUM -l ci",
     "lint": "./node_modules/.bin/eslint .",
     "build": "wsk-builder -v --entryFile index.js",
-    "deploy": "wsk-builder -v --deploy --test=/_status_check/pingdom.xml",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "deploy": "wsk-builder -v --deploy --test=/_status_check/pingdom.xml"
   },
   "repository": {
     "type": "git",
@@ -29,11 +27,10 @@
   "homepage": "https://github.com/adobe/helix-perf#readme",
   "dependencies": {
     "@adobe/fastly-native-promises": "^1.11.0",
-    "@adobe/helix-pingdom-status": "^3.1.1",
+    "@adobe/helix-status": "4.2.0",
     "@adobe/openwhisk-action-utils": "^1.0.2",
     "calibre": "^2.3.2",
     "epsagon": "^1.32.3",
-    "snyk": "^1.217.0",
     "uri-js": "^4.2.2"
   },
   "devDependencies": {
@@ -61,7 +58,6 @@
     "semantic-release": "^15.13.21",
     "sinon": "^7.4.1"
   },
-  "snyk": true,
   "wsk": {
     "name": "helix-services/perf@${version}"
   }

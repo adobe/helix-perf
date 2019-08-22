@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { wrap } = require('@adobe/helix-pingdom-status');
+const { wrap } = require('@adobe/helix-status');
 const { logger: createLogger } = require('@adobe/openwhisk-action-utils');
 const perf = require('./perf.js');
 
