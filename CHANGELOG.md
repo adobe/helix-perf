@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/adobe/helix-perf/compare/v1.0.5...v1.1.0) (2019-08-22)
+
+
+### Features
+
+* **monitoring:** upgrade helix-pingdom-status to helix-status ([bb9938d](https://github.com/adobe/helix-perf/commit/bb9938d))
+
 ## [1.0.5](https://github.com/adobe/helix-perf/compare/v1.0.4...v1.0.5) (2019-08-19)
 
 
