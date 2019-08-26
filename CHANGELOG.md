@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/adobe/helix-perf/compare/v1.1.0...v1.1.1) (2019-08-26)
+
+
+### Bug Fixes
+
+* **monitoring:** upgrade epsagon and hide more params ([8651f39](https://github.com/adobe/helix-perf/commit/8651f39))
+
 # [1.1.0](https://github.com/adobe/helix-perf/compare/v1.0.5...v1.1.0) (2019-08-22)
 
 
