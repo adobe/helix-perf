@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/adobe/helix-perf/compare/v1.1.1...v1.1.2) (2019-09-03)
+
+
+### Bug Fixes
+
+* **package:** update @adobe/helix-status to version 4.2.1 ([d4e2767](https://github.com/adobe/helix-perf/commit/d4e2767))
+
 ## [1.1.1](https://github.com/adobe/helix-perf/compare/v1.1.0...v1.1.1) (2019-08-26)
 
 
