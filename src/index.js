@@ -10,10 +10,8 @@
  * governing permissions and limitations under the License.
  */
 const { wrap } = require('@adobe/helix-status');
-const { logger: createLogger } = require('@adobe/openwhisk-action-utils');
+const { logger } = require('@adobe/openwhisk-action-utils');
 const perf = require('./perf.js');
-
-let log;
 
 /**
  * Runs the action by wrapping the `perf` function with the pingdom-status utility.
@@ -22,6 +20,7 @@ let log;
  * @returns {Promise<*>} The response
  */
 async function run(params) {
+  const { __ow_logger: log } = params;
   let action = perf;
   if (params && params.EPSAGON_TOKEN) {
     // ensure that epsagon is only required, if a token is present. this is to avoid invoking their
@@ -42,24 +41,10 @@ async function run(params) {
 /**
  * Main function called by the openwhisk invoker.
  * @param params Action params
- * @param logger The logger.
  * @returns {Promise<*>} The response
  */
-async function main(params, logger = log) {
-  try {
-    log = createLogger(params, logger);
-    const result = await run(params);
-    if (log.flush) {
-      log.flush(); // don't wait
-    }
-    return result;
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.error(e);
-    return {
-      statusCode: e.statusCode || 500,
-    };
-  }
+async function main(params) {
+  return logger.wrap(run, params);
 }
 
 module.exports.main = main;
