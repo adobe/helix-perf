@@ -60,5 +60,12 @@
   },
   "wsk": {
     "name": "helix-services/perf@${version}"
+  },
+  "statuspage": {
+    "name": "Helix Performance",
+    "group": "Development"
+  },
+  "newrelic": {
+    "group_policy": "Development Repeated Failure"
   }
 }
