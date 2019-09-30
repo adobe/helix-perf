@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/adobe/helix-perf/compare/v1.1.4...v1.1.5) (2019-09-30)
+
+
+### Bug Fixes
+
+* **package:** update @adobe/helix-status to version 5.0.1 ([7f89eed](https://github.com/adobe/helix-perf/commit/7f89eed))
+
 ## [1.1.4](https://github.com/adobe/helix-perf/compare/v1.1.3...v1.1.4) (2019-09-30)
 
 
