@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@adobe/eslint-config-helix": "1.1.0",
-    "@adobe/helix-shared": "3.0.0",
+    "@adobe/helix-shared": "3.0.1",
     "@adobe/openwhisk-action-builder": "2.1.0",
     "@semantic-release/changelog": "3.0.4",
     "@semantic-release/commit-analyzer": "6.3.0",
@@ -45,7 +45,7 @@
     "@semantic-release/release-notes-generator": "7.3.0",
     "ajv": "6.10.2",
     "codecov": "3.6.1",
-    "eslint": "6.5.0",
+    "eslint": "6.5.1",
     "eslint-plugin-header": "3.0.0",
     "eslint-plugin-import": "2.18.2",
     "istanbul": "1.1.0-alpha.1",
