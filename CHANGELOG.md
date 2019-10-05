@@ -1,3 +1,11 @@
+## [1.1.8](https://github.com/adobe/helix-perf/compare/v1.1.7...v1.1.8) (2019-10-05)
+
+
+### Bug Fixes
+
+* **deploy:** use correct package ([adc2759](https://github.com/adobe/helix-perf/commit/adc2759))
+* **deploy:** use helix-services-private ([#81](https://github.com/adobe/helix-perf/issues/81)) ([0cd5782](https://github.com/adobe/helix-perf/commit/0cd5782))
+
 ## [1.1.7](https://github.com/adobe/helix-perf/compare/v1.1.6...v1.1.7) (2019-10-05)
 
 
