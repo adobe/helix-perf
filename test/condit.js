@@ -19,9 +19,11 @@ function condit(name, condition, mochafn) {
 }
 
 condit.hasenv = (name) => {
-  const fn = function env() {
-    return !!process.env[name];
-  };
+  class fn {
+    constructor() {
+      return !!process.env[name];
+    }
+  }
   fn.description = `env var ${name} must be set`;
   return fn;
 };
