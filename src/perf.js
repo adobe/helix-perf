@@ -12,8 +12,12 @@
 const URI = require('uri-js');
 const fastly = require('@adobe/fastly-native-promises');
 
-function init(token) {
+function setENVtoken(token) {
   process.env.CALIBRE_API_TOKEN = token;
+}
+
+function init(token) {
+  setENVtoken(token);
   let calibre;
   return () => {
     if (calibre) {
@@ -48,11 +52,11 @@ function test(calibre, {
 }
 
 async function result(calibre, uuid) {
-  const nothing = new Promise(((resolve) => {
+  const nothing = new Promise((resolve) => {
     // maximum response time for OpenWhisk is 60 seconds,
     // so let's wait no longer than 45 seconds.
     setTimeout(resolve, 1000 * 45, uuid);
-  }));
+  });
 
   const testresult = calibre.Test.waitForTest(uuid);
 
@@ -64,14 +68,15 @@ async function result(calibre, uuid) {
 }
 
 async function perf({
-  CALIBRE_API_TOKEN,
-  service,
-  token,
-  tests = [],
+  CALIBRE_API_TOKEN, service, token, tests = [],
 }) {
   const getcalibre = init(CALIBRE_API_TOKEN);
-  if (tests.length > 0 && tests.reduce((p, uuid) => p && typeof uuid === 'string', true)) {
-    return fastly(token, service).readVersions()
+  if (
+    tests.length > 0
+    && tests.reduce((p, uuid) => p && typeof uuid === 'string', true)
+  ) {
+    return fastly(token, service)
+      .readVersions()
       .then(() => Promise.all(tests.map((uuid) => result(getcalibre(), uuid)))
         .then((res) => ({
           statusCode: 200,
@@ -90,7 +95,8 @@ async function perf({
       }));
     // eslint-disable-next-line camelcase
   }
-  return fastly(token, service).readVersions()
+  return fastly(token, service)
+    .readVersions()
     .then(() => Promise.all(tests.map((spec) => test(getcalibre(), spec)))
       .then((res) => ({
         statusCode: 200,
