@@ -43,7 +43,7 @@ async function run(params) {
  * @param params Action params
  * @returns {Promise<*>} The response
  */
-async function main(params) {
+function main(params) {
   return logger.wrap(run, params);
 }
 
