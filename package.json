@@ -17,7 +17,7 @@
   },
   "wsk": {
     "name": "helix-services-private/perf@${version}",
-    "lknksPackage": "helix-services"
+    "linksPackage": "helix-services"
   },
   "repository": {
     "type": "git",
