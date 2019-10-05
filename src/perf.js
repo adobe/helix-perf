@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 const URI = require('uri-js');
-const fastly = require('@adobe/fastly-native-promises');
+const Fastly = require('@adobe/fastly-native-promises');
 
 function init(token) {
   process.env.CALIBRE_API_TOKEN = token;
@@ -90,7 +90,7 @@ async function perf({
       }));
     // eslint-disable-next-line camelcase
   }
-  return fastly(token, service).readVersions()
+  return Fastly(token, service).readVersions()
     .then(() => Promise.all(tests.map((spec) => test(getcalibre(), spec)))
       .then((res) => ({
         statusCode: 200,
