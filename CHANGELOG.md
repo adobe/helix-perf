@@ -1,3 +1,10 @@
+## [1.1.13](https://github.com/adobe/helix-perf/compare/v1.1.12...v1.1.13) (2019-11-05)
+
+
+### Bug Fixes
+
+* **status:** disable checks for calibre ([#97](https://github.com/adobe/helix-perf/issues/97)) ([#98](https://github.com/adobe/helix-perf/issues/98)) ([d361d0c](https://github.com/adobe/helix-perf/commit/d361d0c8fb9196fe2be235e95d336ca0fcae6cbc))
+
 ## [1.1.12](https://github.com/adobe/helix-perf/compare/v1.1.11...v1.1.12) (2019-10-31)
 
 
