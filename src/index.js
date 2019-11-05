@@ -35,7 +35,10 @@ async function run(params) {
       ignoredKeys: [/[A-Z0-9_]+/],
     });
   }
-  return wrap(action, { calibre: 'https://calibreapp.com/graphql' })(params);
+  // TODO: enable checks again, once we have support for more elaborate requests.
+  // TODO: see: https://github.com/adobe/helix-status/issues/48
+  // return wrap(action, { calibre: 'https://calibreapp.com/graphql' })(params);
+  return wrap(action)(params);
 }
 
 /**
