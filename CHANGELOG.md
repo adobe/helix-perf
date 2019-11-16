@@ -1,3 +1,10 @@
+## [1.1.17](https://github.com/adobe/helix-perf/compare/v1.1.16...v1.1.17) (2019-11-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-status to v6 ([1550d9c](https://github.com/adobe/helix-perf/commit/1550d9c0107fe0e85535fe4bdf31f3dbc7adb8ee))
+
 ## [1.1.16](https://github.com/adobe/helix-perf/compare/v1.1.15...v1.1.16) (2019-11-14)
 
 
