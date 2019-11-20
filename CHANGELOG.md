@@ -1,3 +1,10 @@
+## [1.1.19](https://github.com/adobe/helix-perf/compare/v1.1.18...v1.1.19) (2019-11-20)
+
+
+### Bug Fixes
+
+* **monitoring:** switch to helix-ops ([eccd72f](https://github.com/adobe/helix-perf/commit/eccd72f72f5f1491a6f9aa864f10c5a6cccb537b))
+
 ## [1.1.18](https://github.com/adobe/helix-perf/compare/v1.1.17...v1.1.18) (2019-11-20)
 
 
