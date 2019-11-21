@@ -31,7 +31,7 @@
   "homepage": "https://github.com/adobe/helix-perf#readme",
   "dependencies": {
     "@adobe/fastly-native-promises": "1.14.2",
-    "@adobe/helix-status": "7.0.1",
+    "@adobe/helix-status": "7.0.2",
     "@adobe/openwhisk-action-utils": "2.7.2",
     "calibre": "2.3.2",
     "epsagon": "1.42.0",
