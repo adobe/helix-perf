@@ -129,7 +129,7 @@ describe('Mocked Tests', () => {
 
   const fakecreate = sinon.fake.resolves({ uuid: '170b278' });
   const fakewait = sinon.fake.resolves(example);
-  const perf = proxyquire('../src/perf', {
+  const prf = proxyquire('../src/perf', {
     calibre: {
       Test: {
         create: fakecreate,
@@ -139,6 +139,10 @@ describe('Mocked Tests', () => {
     '@adobe/fastly-native-promises': () => ({
       readVersions: sinon.fake.resolves(true),
     }),
+  });
+
+  const { main: perf } = proxyquire('../src/index', {
+    './perf': prf,
   });
 
   it('Works without arguments', async () => {

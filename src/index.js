@@ -9,36 +9,33 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { wrap } = require('@adobe/helix-status');
-const { logger } = require('@adobe/openwhisk-action-utils');
+const { wrap: status } = require('@adobe/helix-status');
+const { wrap } = require('@adobe/openwhisk-action-utils');
+const { logger } = require('@adobe/openwhisk-action-logger');
 const perf = require('./perf.js');
 
 /**
- * Runs the action by wrapping the `perf` function with the pingdom-status utility.
- * Additionally, if a EPSAGON_TOKEN is configured, the epsagon tracers are instrumented.
- * @param params Action params
- * @returns {Promise<*>} The response
+ * Instruments the action with epsagon, if a EPSAGON_TOKEN is configured.
  */
-async function run(params) {
-  const { __ow_logger: log } = params;
-  let action = perf;
-  if (params && params.EPSAGON_TOKEN) {
-    // ensure that epsagon is only required, if a token is present. this is to avoid invoking their
-    // patchers otherwise.
-    // eslint-disable-next-line global-require
-    const { openWhiskWrapper } = require('epsagon');
-    log.info('instrumenting epsagon.');
-    action = openWhiskWrapper(action, {
-      token_param: 'EPSAGON_TOKEN',
-      appName: 'Helix Services',
-      metadataOnly: false, // Optional, send more trace data,
-      ignoredKeys: [/[A-Z0-9_]+/],
-    });
-  }
-  // TODO: enable checks again, once we have support for more elaborate requests.
-  // TODO: see: https://github.com/adobe/helix-status/issues/48
-  // return wrap(action, { calibre: 'https://calibreapp.com/graphql' })(params);
-  return wrap(action)(params);
+function epsagon(action) {
+  return async (params) => {
+    const { __ow_logger: log } = params;
+    if (params && params.EPSAGON_TOKEN) {
+      // ensure that epsagon is only required, if a token is present.
+      // this is to avoid invoking their patchers otherwise.
+      // eslint-disable-next-line global-require
+      const { openWhiskWrapper } = require('epsagon');
+      log.info('instrumenting epsagon.');
+      // eslint-disable-next-line no-param-reassign
+      action = openWhiskWrapper(action, {
+        token_param: 'EPSAGON_TOKEN',
+        appName: 'Helix Services',
+        metadataOnly: false, // Optional, send more trace data,
+        ignoredKeys: [/[A-Z0-9_]+/],
+      });
+    }
+    return action(params);
+  };
 }
 
 /**
@@ -46,8 +43,11 @@ async function run(params) {
  * @param params Action params
  * @returns {Promise<*>} The response
  */
-async function main(params) {
-  return logger.wrap(run, params);
-}
-
-module.exports.main = main;
+module.exports.main = wrap(perf)
+  .with(epsagon)
+  // TODO: enable checks again, once we have support for more elaborate requests.
+  // TODO: see: https://github.com/adobe/helix-status/issues/48
+  // .with(status, { calibre: 'https://calibreapp.com/graphql' })
+  .with(status)
+  .with(logger.trace)
+  .with(logger);
