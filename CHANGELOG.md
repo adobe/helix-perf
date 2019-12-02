@@ -1,3 +1,10 @@
+## [1.1.22](https://github.com/adobe/helix-perf/compare/v1.1.21...v1.1.22) (2019-12-02)
+
+
+### Bug Fixes
+
+* **release:** triggering release ([07a54a3](https://github.com/adobe/helix-perf/commit/07a54a30574525d193c9f4411a6887f77a170eb9))
+
 ## [1.1.21](https://github.com/adobe/helix-perf/compare/v1.1.20...v1.1.21) (2019-11-25)
 
 
