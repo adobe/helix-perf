@@ -35,7 +35,7 @@
     "@adobe/openwhisk-action-logger": "2.0.0",
     "@adobe/openwhisk-action-utils": "3.0.0",
     "calibre": "2.3.2",
-    "epsagon": "1.42.1",
+    "epsagon": "1.42.4",
     "uri-js": "4.2.2"
   },
   "devDependencies": {
@@ -48,10 +48,10 @@
     "@semantic-release/exec": "3.3.8",
     "@semantic-release/git": "7.0.18",
     "@semantic-release/github": "5.5.5",
-    "@semantic-release/release-notes-generator": "7.3.4",
+    "@semantic-release/release-notes-generator": "7.3.5",
     "ajv": "6.10.2",
     "codecov": "3.6.1",
-    "eslint": "6.7.0",
+    "eslint": "6.7.2",
     "eslint-plugin-header": "3.0.0",
     "eslint-plugin-import": "2.18.2",
     "istanbul": "1.1.0-alpha.1",
