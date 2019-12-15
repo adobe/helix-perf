@@ -1,3 +1,10 @@
+## [1.1.23](https://github.com/adobe/helix-perf/compare/v1.1.22...v1.1.23) (2019-12-15)
+
+
+### Bug Fixes
+
+* **deps:** update external ([#127](https://github.com/adobe/helix-perf/issues/127)) ([eb2a3f0](https://github.com/adobe/helix-perf/commit/eb2a3f0789d73ea4bb32e5ba929cc3d12694e630))
+
 ## [1.1.22](https://github.com/adobe/helix-perf/compare/v1.1.21...v1.1.22) (2019-12-02)
 
 
