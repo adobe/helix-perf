@@ -1,3 +1,10 @@
+## [1.1.27](https://github.com/adobe/helix-perf/compare/v1.1.26...v1.1.27) (2020-01-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-status to v7.0.3 ([#137](https://github.com/adobe/helix-perf/issues/137)) ([ca72f29](https://github.com/adobe/helix-perf/commit/ca72f29de50896f9d1c14551df6bde07e31bd5a1))
+
 ## [1.1.26](https://github.com/adobe/helix-perf/compare/v1.1.25...v1.1.26) (2020-01-09)
 
 
