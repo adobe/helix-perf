@@ -36,4 +36,3 @@ Contributions are highly welcome.
 Deploying Helix Perf requires the `wsk` command line client, authenticated to a namespace of your choice. For Project Helix, we use the `helix` namespace.
 
 Run `npm run deploy` to do a one-shot deploment of Helix Perf. All commits to master that pass the testing will be deployed automatically.
-
