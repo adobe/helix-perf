@@ -2,7 +2,7 @@ version: 2.1
 executors:
   node10:
     docker:
-    - image: trieloff/githop:node
+    - image: circleci/node:10-stretch
       environment:
         NPM_CONFIG_PREFIX: "~/.npm-global"
     working_directory: ~/repo
@@ -43,6 +43,10 @@ jobs:
         command: npm run test-ci
         environment:
           MOCHA_FILE: junit/test-results.xml
+
+    - run:
+        name: Validate Semantic Release
+        command: npm run test-release
 
     - store_test_results:
         path: junit
