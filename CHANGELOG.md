@@ -1,3 +1,12 @@
+## [1.1.30](https://github.com/adobe/helix-perf/compare/v1.1.29...v1.1.30) (2020-01-24)
+
+
+### Bug Fixes
+
+* **ci:** fix release ([#152](https://github.com/adobe/helix-perf/issues/152)) ([7e6a308](https://github.com/adobe/helix-perf/commit/7e6a30813923db584cd1e0e3e965bd7ef688d4fe))
+* **deps:** update dependency @adobe/helix-epsagon to v1.1.0 ([#151](https://github.com/adobe/helix-perf/issues/151)) ([c32b1db](https://github.com/adobe/helix-perf/commit/c32b1dbbdb75f052b620b0fe0975a5a64da54959))
+* **epsagon:** use helix-epsagon wrapper ([#149](https://github.com/adobe/helix-perf/issues/149)) ([2e02619](https://github.com/adobe/helix-perf/commit/2e02619afd8edfba472ed8dd64c81d867b6993bb))
+
 ## [1.1.29](https://github.com/adobe/helix-perf/compare/v1.1.28...v1.1.29) (2020-01-16)
 
 
