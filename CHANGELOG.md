@@ -1,3 +1,10 @@
+## [1.1.36](https://github.com/adobe/helix-perf/compare/v1.1.35...v1.1.36) (2020-02-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency calibre to v3 ([#169](https://github.com/adobe/helix-perf/issues/169)) ([9d9cbae](https://github.com/adobe/helix-perf/commit/9d9cbae0ea41d65c18bf10413cb8d6be99f32fbf))
+
 ## [1.1.35](https://github.com/adobe/helix-perf/compare/v1.1.34...v1.1.35) (2020-01-31)
 
 
