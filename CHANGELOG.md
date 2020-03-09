@@ -1,3 +1,10 @@
+## [1.1.42](https://github.com/adobe/helix-perf/compare/v1.1.41...v1.1.42) (2020-03-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/openwhisk-action-utils to v4.2.2 ([61076ea](https://github.com/adobe/helix-perf/commit/61076ea32f6bc4156ae62912f8058b3fcf2fb28d))
+
 ## [1.1.41](https://github.com/adobe/helix-perf/compare/v1.1.40...v1.1.41) (2020-03-06)
 
 
