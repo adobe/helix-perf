@@ -1,3 +1,10 @@
+## [1.1.55](https://github.com/adobe/helix-perf/compare/v1.1.54...v1.1.55) (2020-04-14)
+
+
+### Bug Fixes
+
+* **deploy:** use helix-services package ([#225](https://github.com/adobe/helix-perf/issues/225)) ([4bbbf6f](https://github.com/adobe/helix-perf/commit/4bbbf6fcc11e7536b1836065c24a9231af9c076f))
+
 ## [1.1.54](https://github.com/adobe/helix-perf/compare/v1.1.53...v1.1.54) (2020-04-08)
 
 
