@@ -17,8 +17,7 @@
     "deploy": "wsk-builder -v --deploy --test=/_status_check/pingdom.xml"
   },
   "wsk": {
-    "name": "helix-services-private/perf@${version}",
-    "linksPackage": "helix-services"
+    "name": "helix-services/perf@${version}"
   },
   "repository": {
     "type": "git",
