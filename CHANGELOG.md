@@ -1,3 +1,10 @@
+## [1.1.58](https://github.com/adobe/helix-perf/compare/v1.1.57...v1.1.58) (2020-04-30)
+
+
+### Bug Fixes
+
+* **deps:** update external ([646008a](https://github.com/adobe/helix-perf/commit/646008aef6875ff4368915253be2f5d7656634d8))
+
 ## [1.1.57](https://github.com/adobe/helix-perf/compare/v1.1.56...v1.1.57) (2020-04-24)
 
 
