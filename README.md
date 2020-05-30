@@ -6,7 +6,7 @@
 [![GitHub license](https://img.shields.io/github/license/adobe/helix-perf.svg)](https://github.com/adobe/helix-perf/blob/master/LICENSE.txt)
 [![GitHub issues](https://img.shields.io/github/issues/adobe/helix-perf.svg)](https://github.com/adobe/helix-perf/issues)
 [![LGTM Code Quality Grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/adobe/helix-perf.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/adobe/helix-perf) 
-[![Greenkeeper badge](https://badges.greenkeeper.io/adobe/helix-perf.svg)](https://greenkeeper.io/)
+
 
 > Microservice for getting Project Helix performance results
 
