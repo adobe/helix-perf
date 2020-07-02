@@ -1,3 +1,10 @@
+## [1.1.75](https://github.com/adobe/helix-perf/compare/v1.1.74...v1.1.75) (2020-07-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-status to v8 ([#288](https://github.com/adobe/helix-perf/issues/288)) ([ddfa6e0](https://github.com/adobe/helix-perf/commit/ddfa6e0231bf101324bbe66b5f8fcc8dc4c1b8f2))
+
 ## [1.1.74](https://github.com/adobe/helix-perf/compare/v1.1.73...v1.1.74) (2020-06-29)
 
 
