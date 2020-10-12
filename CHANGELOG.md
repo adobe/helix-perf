@@ -1,3 +1,10 @@
+## [1.1.95](https://github.com/adobe/helix-perf/compare/v1.1.94...v1.1.95) (2020-10-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/openwhisk-action-logger to v2.2.1 ([35a6b4a](https://github.com/adobe/helix-perf/commit/35a6b4aa7b1d6cb50210432396ec346e7f5710ff))
+
 ## [1.1.94](https://github.com/adobe/helix-perf/compare/v1.1.93...v1.1.94) (2020-10-10)
 
 
