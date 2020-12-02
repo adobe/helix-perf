@@ -1,3 +1,10 @@
+## [1.1.99](https://github.com/adobe/helix-perf/compare/v1.1.98...v1.1.99) (2020-12-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/openwhisk-action-utils to v4.3.3 ([e56ffaa](https://github.com/adobe/helix-perf/commit/e56ffaad276ec39ca2f782e67e6c9ce499a7ae03))
+
 ## [1.1.98](https://github.com/adobe/helix-perf/compare/v1.1.97...v1.1.98) (2020-11-19)
 
 
