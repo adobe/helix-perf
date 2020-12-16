@@ -1,3 +1,10 @@
+## [1.1.105](https://github.com/adobe/helix-perf/compare/v1.1.104...v1.1.105) (2020-12-16)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([a8f47b9](https://github.com/adobe/helix-perf/commit/a8f47b92afb25d82dd08cc5228c052074300db73))
+
 ## [1.1.104](https://github.com/adobe/helix-perf/compare/v1.1.103...v1.1.104) (2020-12-15)
 
 
