@@ -1,3 +1,10 @@
+## [1.1.110](https://github.com/adobe/helix-perf/compare/v1.1.109...v1.1.110) (2021-01-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/fastly-native-promises to v1.19.2 ([3fadbb8](https://github.com/adobe/helix-perf/commit/3fadbb8b64c21a08f7f8dcbc7724964db3c3e39c))
+
 ## [1.1.109](https://github.com/adobe/helix-perf/compare/v1.1.108...v1.1.109) (2020-12-18)
 
 
