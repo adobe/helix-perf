@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-perf",
-  "version": "1.1.128",
+  "version": "1.1.129",
   "description": "Helix Performance",
   "main": "index.js",
   "private": true,
