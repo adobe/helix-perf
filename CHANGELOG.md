@@ -1,3 +1,10 @@
+## [1.1.140](https://github.com/adobe/helix-perf/compare/v1.1.139...v1.1.140) (2021-03-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-status to v9.1.2 ([#441](https://github.com/adobe/helix-perf/issues/441)) ([0f22576](https://github.com/adobe/helix-perf/commit/0f2257608f42d6157791f87f6e01d2571ca5890b))
+
 ## [1.1.139](https://github.com/adobe/helix-perf/compare/v1.1.138...v1.1.139) (2021-03-26)
 
 
