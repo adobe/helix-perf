@@ -1,3 +1,10 @@
+## [1.1.145](https://github.com/adobe/helix-perf/compare/v1.1.144...v1.1.145) (2021-04-08)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-epsagon to v1.6.2 ([3d725e0](https://github.com/adobe/helix-perf/commit/3d725e0c81c89ffd2b77d0c4661bca23c35453f9))
+
 ## [1.1.144](https://github.com/adobe/helix-perf/compare/v1.1.143...v1.1.144) (2021-04-03)
 
 
