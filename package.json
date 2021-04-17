@@ -35,7 +35,7 @@
     "@adobe/helix-status": "9.1.6",
     "@adobe/openwhisk-action-logger": "2.4.4",
     "@adobe/openwhisk-action-utils": "4.4.4",
-    "calibre": "3.2.1",
+    "calibre": "3.2.2",
     "uri-js": "4.4.1"
   },
   "devDependencies": {
